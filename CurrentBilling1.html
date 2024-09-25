@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electricity Bill Generator</title>
+    <style>
+        /* Overall background with image */
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://example.com/your-image.jpg') no-repeat center center fixed; /* Replace with your image URL */
+            background-size: cover; /* Ensures the background covers the entire page */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Container for the form */
+        .container {
+            background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+            border-radius: 16px;
+            box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.2); /* Larger shadow for depth */
+            padding: 30px;
+            max-width: 450px;
+            width: 100%;
+            text-align: center;
+            color: #444;
+            font-size: 18px;
+        }
+
+        /* Styling for the title */
+        h2 {
+            text-align: center;
+            color: #34495e; /* Darker color for title */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Shaded text effect */
+            margin-bottom: 20px;
+        }
+
+        /* Input group and labels */
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            color: #2c3e50;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Button styles */
+        .btn {
+            background-color: #e74c3c;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2); /* Button shadow */
+        }
+
+        .btn:hover {
+            background-color: #c0392b;
+        }
+
+        /* Styling the result section */
+        .result {
+            margin-top: 30px;
+            font-size: 20px;
+            padding: 15px;
+            background-color: #2ecc71;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Text shading */
+            box-shadow: 2px 2px 15px rgba(0, 0, 0, 0.2); /* Subtle box shadow */
+        }
+
+        /* Additional styling for mobile responsiveness */
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+                font-size: 16px;
+            }
+
+            .btn {
+                font-size: 16px;
+            }
+
+            .result {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Electricity Bill Generator</h2>
+        <div class="input-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your name">
+        </div>
+        <div class="input-group">
+            <label for="address">Address:</label>
+            <input type="text" id="address" placeholder="Enter your address">
+        </div>
+        <div class="input-group">
+            <label for="meterno">Meter No:</label>
+            <input type="number" id="meterno" placeholder="Enter your meter number">
+        </div>
+        <div class="input-group">
+            <label for="units">Units Consumed:</label>
+            <input type="number" id="units" placeholder="Enter units consumed">
+        </div>
+        <button class="btn" onclick="generateBill()">Generate Bill</button>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function generateBill() {
+            let units = parseFloat(document.getElementById('units').value);
+            let result = document.getElementById('result');
+            let totalBill = 0;
+
+            if (units >= 1 && units <= 50) {
+                totalBill = units * 5;
+            } else if (units >= 51 && units <= 150) {
+                totalBill = (50 * 5) + (units - 50) * 7;
+            } else if (units >= 151 && units <= 250) {
+                totalBill = (50 * 5) + (100 * 7) + (units - 150) * 12;
+            } else if (units > 250) {
+                totalBill = (50 * 5) + (100 * 7) + (100 * 12) + (units - 250) * 15;
+            }
+
+            result.innerHTML = `Total Bill: ₹${totalBill.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
